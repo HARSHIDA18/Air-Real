@@ -1,0 +1,48 @@
+@(clientSecret: String)
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payments Page</title>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+<h1>Make a Payment</h1>
+<form id="payment-form">
+    <div id="card-element">
+        <!-- A Stripe Element will be inserted here. -->
+    </div>
+    <!-- Used to display form errors. -->
+    <div id="card-errors" role="alert"></div>
+    <button id="submit">
+        Pay
+    </button>
+</form>
+
+<script>
+    var stripe = Stripe('pk_test_51NdRlrSDkDkuBGzQDhJzzQNYioCV9Hw4ZKlyOSdDcEiK6o17NMIwjVRUAxkrUl7jnrxnY9OxLdFlGomc08nFE8a900rCZ8dqhv');
+    var elements = stripe.elements();
+    var cardElement = elements.create('card');
+    cardElement.mount('#card-element');
+
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      stripe.confirmCardPayment("@clientSecret", {
+        payment_method: {
+          card: cardElement,
+        }
+      }).then(function(result) {
+        if (result.error) {
+          var errorElement = document.getElementById('card-errors');
+          errorElement.textContent = result.error.message;
+        } else {
+          println("Payment Suceeded")
+          Future.successful(Ok("Payment succeeded"))
+        }
+      });
+    });
+</script>
+</body>
+</html>

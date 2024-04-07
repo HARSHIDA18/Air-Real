@@ -1,0 +1,148 @@
+@(userForm: Form[User])(implicit request: RequestHeader, messagesProvider: MessagesProvider)
+
+@main("Aeroplane System") {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #FFDAB9; /* Peach background */
+        }
+
+        .container {
+            max-width: 500px; /* Increased max-width */
+            padding: 40px; /* Increased padding */
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .form-container {
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 28px; /* Increased font size */
+            color: #333;
+            margin-bottom: 30px; /* Increased margin bottom */
+        }
+
+        .form-group {
+            margin-bottom: 30px; /* Increased margin bottom */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px; /* Increased margin bottom */
+            color: #555;
+            font-size: 16px; /* Increased font size */
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 14px; /* Increased padding */
+            border: 1px solid #ddd;
+            border-radius: 10px; /* Increased border radius */
+            outline: none;
+            font-size: 16px; /* Increased font size */
+            color: #555; /* Placeholder color */
+        }
+
+        input[type="text"]::placeholder,
+        input[type="email"]::placeholder,
+        input[type="password"]::placeholder {
+            font-size: 16px; /* Increased placeholder font size */
+            color: #aaa; /* Placeholder color */
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #FF6347; /* Peach border color on focus */
+        }
+
+        button {
+            width: 100%;
+            padding: 14px; /* Increased padding */
+            border: none;
+            border-radius: 10px; /* Increased border radius */
+            background-color: #FF6347; /* Peach button background color */
+            color: #fff;
+            font-size: 18px; /* Increased font size */
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #FF4500; /* Darker shade of peach on hover */
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px; /* Add some space above the login link */
+        }
+
+        .login-link p {
+            font-size: 14px;
+            color: #666; /* Adjust the color of the text */
+        }
+
+        .login-link a {
+            color: #FF6347; /* Peach color for the login link */
+            text-decoration: none;
+            transition: color 0.3s ease; /* Smooth transition for color change */
+        }
+
+        .login-link a:hover {
+            color: #FF4500; /* Darker shade of peach on hover */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="form-container">
+        <h2>Lets Explore !</h2>
+        <form action="@routes.UserController.processLogin" method="POST">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            @helper.CSRF.formField
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <div class="login-link">
+        <p>Don't have an account? <a href="@routes.UserController.showregisterForm">Register</a></p>
+    </div>
+</div>
+</body>
+</html>
+}
