@@ -23,11 +23,19 @@ GET     /create-payment-intent       controllers.PaymentsController.createPaymen
 
 
 #flight data
-GET     /flight/form                    controllers.FlightController.index
-POST    /flight/submit                  controllers.FlightController.submitFlightData
+GET     /flight/form                controllers.FlightController.index
+POST    /flight/submit              controllers.FlightController.submitFlightData
+GET     /flight/available           controllers.FlightController.showAvailableFlights
+GET     /flight/searchFlights              controllers.FlightController.searchFlights
+
+
 
 GET     /login                      controllers.UserController.showLoginForm()
 POST    /login                      controllers.UserController.processLogin()
 GET     /register                   controllers.UserController.showregisterForm()
 POST    /register                   controllers.UserController.processRegister()
 
+
+GET     /user/booking            controllers.UserBookingController.showBookingForm()
+
+POST    /user/booking        controllers.UserBookingController.bookFlight

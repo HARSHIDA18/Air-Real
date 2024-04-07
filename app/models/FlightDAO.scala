@@ -34,7 +34,11 @@ class FlightDAO @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ec:
     flights += formData
   }.map(_ => ())
 
-  def getFlightById(id: Long): Future[Option[FlightFormData]] = db.run {
-    flights.filter(_.flightid === id).result.headOption
+  def getFlightsBySourceAndDestination(source: String, destination: String): Future[Seq[FlightFormData]] = db.run {
+    flights.filter(f => f.source === source && f.destination === destination).result
+  }
+
+  def getAllFlights: Future[Seq[FlightFormData]] = db.run {
+    flights.result
   }
 }

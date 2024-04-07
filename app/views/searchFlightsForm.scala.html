@@ -1,0 +1,114 @@
+@(searchForm: Form[(String, String)])(implicit request: RequestHeader, messages: Messages)
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Flights</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #FFDAB9; /* Peach background */
+        }
+
+        .container {
+            max-width: 500px; /* Increased max-width */
+            padding: 40px; /* Increased padding */
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .form-container {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 28px; /* Increased font size */
+            color: #333;
+            margin-bottom: 30px; /* Increased margin bottom */
+        }
+
+        .form-group {
+            margin-bottom: 30px; /* Increased margin bottom */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px; /* Increased margin bottom */
+            color: #555;
+            font-size: 16px; /* Increased font size */
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 14px; /* Increased padding */
+            border: 1px solid #ddd;
+            border-radius: 10px; /* Increased border radius */
+            outline: none;
+            font-size: 16px; /* Increased font size */
+            color: #555; /* Placeholder color */
+        }
+
+        input[type="text"]::placeholder {
+            font-size: 16px; /* Increased placeholder font size */
+            color: #aaa; /* Placeholder color */
+        }
+
+        input[type="text"]:focus {
+            border-color: #FF6347; /* Peach border color on focus */
+        }
+
+        button {
+            width: 100%;
+            padding: 14px; /* Increased padding */
+            border: none;
+            border-radius: 10px; /* Increased border radius */
+            background-color: #FF6347; /* Peach button background color */
+            color: #fff;
+            font-size: 18px; /* Increased font size */
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #FF4500; /* Darker shade of peach on hover */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="form-container">
+        <h1>Search Flights</h1>
+        <form action="@routes.FlightController.searchFlights" method="GET">
+            <div class="form-group">
+                <label for="source">Source:</label>
+                <input type="text" id="source" name="source" placeholder="Enter source" required>
+            </div>
+            <div class="form-group">
+                <label for="destination">Destination:</label>
+                <input type="text" id="destination" name="destination" placeholder="Enter destination" required>
+            </div>
+            @helper.CSRF.formField
+            <button type="submit">Search</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
